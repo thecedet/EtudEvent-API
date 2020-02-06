@@ -9,7 +9,7 @@ FROM annonce
 LEFT JOIN user 
 ON annonce.owner = user.uid
 ORDER BY annonce.date ASC
-LIMIT ${0 + page*show}, ${show + page*show}    
+LIMIT ${0 + page*show}, ${show}    
 `
 }
 
