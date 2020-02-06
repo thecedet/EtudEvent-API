@@ -21,6 +21,6 @@ server.get("/", (request, response) => {
     response.status(200).send("Etud'event API")
 })
 server.use("/", Router)
-
+server.use('/cdn', express.static('cdn'));
 
 server.listen(PORT_API, console.log(`Server API listen on ${PORT_API}`))
