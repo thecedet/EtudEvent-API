@@ -3,7 +3,7 @@ const connection = require("../utils/mysql")
 const query = {
     select: (page,show) => `
 SELECT
-annonce.uid, annonce.date, annonce.title, 
+annonce.uid, annonce.date, annonce.title, annonce.data, 
 user.firstName AS userFirstName, user.lastName AS userLastName
 FROM annonce 
 LEFT JOIN user 
