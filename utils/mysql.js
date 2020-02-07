@@ -6,6 +6,6 @@ connection = mysql.createConnection({
   password : process.env.BDD_PASSWORD || 'mU8*rZ1*',
   database : process.env.BDD_DATABASE || 'sql2317009'
 });
-connection.connect()
+
 
 module.exports = connection
