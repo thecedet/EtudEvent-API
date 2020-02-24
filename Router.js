@@ -3,6 +3,8 @@ const express = require("express")
 const account = require("./routes/account")
 const annonce = require("./routes/annonce")
 
+const mail = require("./utils/sendMail")
+
 exports.router = (() => {
 
     const Router = express.Router()

@@ -1,3 +1,5 @@
+const fs = require("fs")
+
 module.exports = (to,subject,text) => {
     require('gmail-send')({
         user: process.env.MAIL_USER ,
@@ -7,7 +9,7 @@ module.exports = (to,subject,text) => {
         subject
     
     })({
-        text,  
+        html: fs.readFileSync("./index.html", "utf8")  
     }, (error, result, fullResult) => {
         if (error) console.error(error);
         console.log(result);
