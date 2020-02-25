@@ -18,6 +18,7 @@ exports.router = (() => {
     Router.route("/annonce/").get(annonce.select)
 
     Router.route("/notification/register").post(notification.register)
+    Router.route("/notification/send").post(notification.send)
 
     return Router
 })()
