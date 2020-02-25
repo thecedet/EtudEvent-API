@@ -2,7 +2,7 @@ const express = require("express")
 
 const account = require("./routes/account")
 const annonce = require("./routes/annonce")
-const notificaton = require("./routes/notification")
+const notification = require("./routes/notification")
 
 const mail = require("./utils/sendMail")
 
@@ -17,7 +17,7 @@ exports.router = (() => {
 
     Router.route("/annonce/").get(annonce.select)
 
-    Router.route("/notificaton/register").post(notificaton.register)
+    Router.route("/notification/register").post(notification.register)
 
     return Router
 })()
