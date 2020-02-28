@@ -91,7 +91,7 @@ module.exports = {
             return
         }
 
-        connection.query(`SELECT uid, firstName, lastName, department, image, email, checked FROM user WHERE email="${email}" AND password="${password}"`,
+        connection.query(`SELECT uid, firstName, lastName, department, image, email, checked FROM user WHERE email REGEXP "${email}" AND password="${password}"`,
         (error, result) => {
             if(error) {
                    response.status(503).json({result: error})
