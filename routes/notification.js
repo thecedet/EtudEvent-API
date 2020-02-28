@@ -46,7 +46,11 @@ module.exports = {
                     }else {
                         let messages = [{
                             to: notifictation,
-                            sound: "default",
+                            sound: true,
+                            vibrate: true,
+                            android: {
+                                sound: true
+                            },
                             body, title
                         }]
                         expo.sendPushNotificationsAsync(messages).then(ticket => {
