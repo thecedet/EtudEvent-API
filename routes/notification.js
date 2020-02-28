@@ -46,7 +46,6 @@ module.exports = {
                     }else {
                         let messages = [{
                             to: notifictation,
-                            sound: true,
                             vibrate: true,
                             android: {
                                 sound: true
