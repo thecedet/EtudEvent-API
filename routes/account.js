@@ -1,7 +1,7 @@
 const connection = require("../utils/mysql")
 const mail = require("../utils/sendMail")
 const jwtUtils = require("../utils/jwt")
-
+const bcrypt = require("bcrypt")
 
 module.exports = {
     create: (request, response) => {
@@ -10,7 +10,7 @@ module.exports = {
 
         const email = request.body.email
         const department = request.body.department
-        const password = request.body.password
+        const password = bcrypt.hashSync(request.body.password, 10)
 
         if(!(email && department && password)) {
             response.status(400).json({
@@ -91,7 +91,7 @@ module.exports = {
             return
         }
 
-        connection.query(`SELECT uid, firstName, lastName, department, image, email, checked FROM user WHERE email REGEXP "${email}" AND password="${password}"`,
+        connection.query(`SELECT uid, firstName, lastName, department, image, email, checked FROM user WHERE email REGEXP "${email}"`,
         (error, result) => {
             if(error) {
                    response.status(503).json({result: error})
@@ -104,6 +104,9 @@ module.exports = {
                     }
                     if(result[0].checked == 0) {
                         response.status(400).json({result: "ERR_CHECKED"})
+                    }
+                    if(bcrypt.compareSync(password, result[0].password)) {
+                        response.status(200).json("mot de passe ui")
                     }else {
                         response.status(200).json({result: "OK", data: result[0]})
                     }
