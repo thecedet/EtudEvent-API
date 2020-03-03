@@ -91,7 +91,7 @@ module.exports = {
             return
         }
 
-        connection.query(`SELECT uid, firstName, lastName, department, image, email, checked FROM user WHERE email REGEXP "${email}"`,
+        connection.query(`SELECT * FROM user WHERE email REGEXP "${email}"`,
         (error, result) => {
             if(error) {
                    response.status(503).json({result: error})
@@ -106,9 +106,9 @@ module.exports = {
                         response.status(400).json({result: "ERR_CHECKED"})
                     }
                     if(bcrypt.compareSync(password, result[0].password)) {
-                        response.status(200).json("mot de passe ui")
-                    }else {
                         response.status(200).json({result: "OK", data: result[0]})
+                    }else {
+                        response.status(400).json({result: "ERR_INVALID_INFO"})
                     }
                     return
                 }

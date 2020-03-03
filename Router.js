@@ -20,5 +20,12 @@ exports.router = (() => {
     Router.route("/notification/register").post(notification.register)
     Router.route("/notification/send").post(notification.send)
 
+    Router.route("/test").get((request,response) => {
+        const bcrypt = require("bcrypt")
+        let password = "$2b$10$92d2iFDg49mjJUp60VCtyOVdRzwQCHJtKEdqRahtGnAD/oA/5YAFa"
+        console.log(bcrypt.compareSync("titi", password)) 
+                     
+    })
+
     return Router
 })()
