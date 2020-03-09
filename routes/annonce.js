@@ -23,14 +23,14 @@ module.exports = {
         connection.query(query.select(page,show),(error, result ) => {
             if(error) {
                 console.log(error)
-                response.status(500).send({
+                response.status(503).send({
                     result: "ERR_BDD"
                 })
                 return
             }
             if(result) {
                 response.status(200).send({
-                    result
+                    result: "OK", annonce: result
                 })
             }
         })

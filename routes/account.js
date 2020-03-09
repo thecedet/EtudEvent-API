@@ -37,6 +37,7 @@ module.exports = {
         (error,result) => {
             if(error) {
                 if(error.code = "ER_DUP_ENTRY") {
+                    console.log(error)
                     response.status(400).json({result: "ERR_EMAIL_EXIST"})
                 }
                 return
