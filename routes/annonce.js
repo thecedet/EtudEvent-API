@@ -29,9 +29,10 @@ module.exports = {
                 return
             }
             if(result) {
-                response.status(200).send({
+                /*response.status(200).send({
                     result: "OK", annonce: result
-                })
+                })*/
+                response.status(200).send({result})
             }
         })
 
