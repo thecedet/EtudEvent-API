@@ -19,6 +19,7 @@ module.exports = {
                 return
             }
             if(result) {
+                console.log(result)
                 response.status(200).send({
                     result
                 })
