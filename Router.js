@@ -15,6 +15,8 @@ exports.router = (() => {
     Router.route("/account/connect").post(account.connect)
     Router.route("/account/list").get(account.list)
 
+    Router.route("/account/test").get(account.test)
+
     Router.route("/annonce/").get(annonce.select)
 
     Router.route("/notification/register").post(notification.register)

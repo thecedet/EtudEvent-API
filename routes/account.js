@@ -4,6 +4,9 @@ const jwtUtils = require("../utils/jwt")
 const bcrypt = require("bcrypt")
 
 module.exports = {
+    test: (request, response) => {
+        mail("clement.dorlet9@etu.univ-lorraine.fr","[Etud'event] Validation du compte","1")
+    },
     create: (request, response) => {
 
         const confirmEmailRegex = new RegExp(/^([\w-]*)\.([a-zA-Z-]+)\d*@(etu)?\.?univ-lorraine\.fr$/gm)
