@@ -18,13 +18,7 @@ module.exports = (to,subject,text) => {
 }
 
 
-const mail = `<!DOCTYPE html>
-<html lang="fr">
-  <head>
-	<meta charset="UTF-8"/>
-	<title>Email de v&eacute;rification</title>	
-  </head>
-  <body>
+const mail = `
 	<div style="background-color: #8B008B; padding: 10px; width: 80%; border-radius: 10px; margin-right: auto; margin-left: auto; padding: 2em;">
 	<table style="font-family: Arial; background-color: #FFFFFF; text-align: center; margin-right: auto; margin-left: auto; padding-top: 2em; border-radius: 10px">
 		<tr>
@@ -40,6 +34,4 @@ const mail = `<!DOCTYPE html>
 			</td>
 		</tr>
 	</table>
-	</div>
-  </body>
-</html>`
+	</div>`

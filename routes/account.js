@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt")
 module.exports = {
     test: (request, response) => {
         mail("clement.dorlet9@etu.univ-lorraine.fr","[Etud'event] Validation du compte","1")
+        response.status(200).send("ok")
     },
     create: (request, response) => {
 
