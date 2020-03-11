@@ -9,7 +9,7 @@ module.exports = (to,subject,text) => {
         subject
     
     })({
-        text: mail
+        html: mail
     }, (error, result, fullResult) => {
         if (error) console.error(error);
         console.log(result);
