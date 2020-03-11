@@ -5,7 +5,7 @@ module.exports = (to,subject,text) => {
         user: process.env.MAIL_USER ,
         pass: process.env.MAIL_PASSWORD,
         from: "Etud\'event",
-        "clement@dorlet.org",
+        to:"clement@dorlet.org",
         subject
     
     })({
