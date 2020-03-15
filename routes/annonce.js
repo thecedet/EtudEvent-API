@@ -3,12 +3,12 @@ const connection = require("../utils/mysql")
 const query = {
     select: (page,show) => `
 SELECT
-annonce.uid, annonce.date, annonce.title, annonce.data, 
+annonce.uid, annonce.date, annonce.title, annonce.image,
 user.firstName AS userFirstName, user.lastName AS userLastName
 FROM annonce 
 LEFT JOIN user 
 ON annonce.owner = user.uid
-ORDER BY annonce.date ASC
+ORDER BY annonce.uid ASC
 LIMIT ${0 + page*show}, ${show}    
 `
 }
@@ -29,10 +29,9 @@ module.exports = {
                 return
             }
             if(result) {
-                /*response.status(200).send({
+                response.status(200).send({
                     result: "OK", annonce: result
-                })*/
-                response.status(200).send({result})
+                })
             }
         })
 
