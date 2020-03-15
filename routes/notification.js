@@ -10,7 +10,7 @@ module.exports = {
         const email = request.body.email
         const token = request.body.token
 
-        connection.query(`UPDATE user SET notifictation  = "${token}" WHERE email="${email}"`,(error, result ) => {
+        connection.query(`UPDATE user SET notifictation  = "${token}" WHERE email REGEXP "${email}"`,(error, result ) => {
             if(error) {
                 console.log(error)
                 response.status(500).send({
