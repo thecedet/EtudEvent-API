@@ -3,8 +3,7 @@ const express = require("express")
 const account = require("./routes/account")
 const annonce = require("./routes/annonce")
 const notification = require("./routes/notification")
-
-const mail = require("./utils/sendMail")
+const permission = require("./utils/permission")
 
 exports.router = (() => {
 
@@ -13,19 +12,15 @@ exports.router = (() => {
     Router.route("/account/create").post(account.create)
     Router.route("/account/validate/:token").get(account.validate)
     Router.route("/account/connect").post(account.connect)
-    Router.route("/account/list").get(account.list)
-
-    Router.route("/account/test").get(account.test)
 
     Router.route("/annonce/").get(annonce.select)
 
     Router.route("/notification/register").post(notification.register)
     Router.route("/notification/send").post(notification.send)
 
-    Router.route("/test").get((request,response) => {
-        console.log(request)
-                     
-    })
+    Router.route("/permission/").get(permission.get)
+
+    Router.route("/test").get((request,response) => console.log(request))
 
     return Router
 })()

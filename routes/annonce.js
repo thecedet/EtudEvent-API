@@ -8,7 +8,7 @@ user.firstName AS userFirstName, user.lastName AS userLastName
 FROM annonce 
 LEFT JOIN user 
 ON annonce.owner = user.uid
-ORDER BY annonce.uid ASC
+ORDER BY annonce.date ASC
 LIMIT ${0 + page*show}, ${show}    
 `
 }

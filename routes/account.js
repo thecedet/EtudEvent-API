@@ -1,13 +1,10 @@
 const connection = require("../utils/mysql")
 const mail = require("../utils/sendMail")
+const getPermissions = require("../utils/permission")
 const jwtUtils = require("../utils/jwt")
 const bcrypt = require("bcrypt")
 
 module.exports = {
-    test: (request, response) => {
-        mail("clement.dorlet9@etu.univ-lorraine.fr","[Etud'event] Validation du compte","1")
-        response.status(200).send("ok")
-    },
     create: (request, response) => {
 
         const confirmEmailRegex = new RegExp(/^([\w-]*)\.([a-zA-Z-]+)\d*@(etu)?\.?univ-lorraine\.fr$/gm)
@@ -20,6 +17,7 @@ module.exports = {
             response.status(400).json({
                 result: "ERR_ARGS"
             })
+            return
         }
 
         let result = confirmEmailRegex.exec(email)
@@ -52,6 +50,7 @@ module.exports = {
                 let url = `${process.env.API_URL}/account/validate/${token}`
                 mail(data.email,"[Etud'event] Validation du compte",url)
                 response.status(200).json({result: "OK"})
+                return
             }
         })
 
@@ -99,29 +98,22 @@ module.exports = {
         connection.query(`SELECT * FROM user WHERE email REGEXP "${email}"`,
         (error, result) => {
             if(error) {
-                   response.status(503).json({result: error})
-                   return
+                response.status(503).json({result: error})
+                return
+            }
+            if(result) {
+                if(result.length === 0) {
+                    response.status(400).json({result: "ERR_INVALID_INFO"})
                 }
-                if(result) {
-                    if(result.length === 0) {
-                        response.status(400).json({result: "ERR_INVALID_INFO"})
-                        return
-                    }
-                    if(result[0].checked == 0) {
-                        response.status(400).json({result: "ERR_CHECKED"})
-                    }
-                    if(bcrypt.compareSync(password, result[0].password)) {
-                        response.status(200).json({result: "OK", data: result[0]})
-                    }else {
-                        response.status(400).json({result: "ERR_INVALID_INFO"})
-                    }
-                    return
+                if(result[0].checked == 0) {
+                    response.status(400).json({result: "ERR_CHECKED"})
                 }
-        })
-    },
-    list: (request,response) => {
-        connection.query("SELECT * FROM user", (error,result) => {
-            response.status(200).json({result})
+                if(bcrypt.compareSync(password, result[0].password)) {
+                    response.status(200).json({result: "OK", data: Object.assign(result[0], getPermissions(result[0].uid))})
+                }else response.status(400).json({result: "ERR_INVALID_INFO"})
+
+                return
+            }
         })
     }
 }
