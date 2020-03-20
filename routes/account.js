@@ -109,7 +109,7 @@ module.exports = {
                     response.status(400).json({result: "ERR_CHECKED"})
                 }
                 if(bcrypt.compareSync(password, result[0].password)) {
-                    response.status(200).json({result: "OK", data: Object.assign(result[0], permission.get(result[0].uid))})
+                    response.status(200).json({result: "OK", data: Object.assign(result[0], {permissions: permission.get(result[0].uid)})})
                 }else response.status(400).json({result: "ERR_INVALID_INFO"})
 
                 return
