@@ -10,13 +10,13 @@ const sqlGet = where => `
 `
 
 module.exports = {
-    get: uid => {
-
+    get: (uid, cb) => {
+        let oui
         connection.query(sqlGet(uid), (error, result) => {
-            if(error) return error
-            return result.map(permission => permission.name)
-        })                        
+            if(error) cb(error)
+            if(result) cb(result.map(permission => permission.name))
             
+        })  
     }
 
 }

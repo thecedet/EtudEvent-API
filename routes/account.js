@@ -87,8 +87,8 @@ module.exports = {
     },
 
     connect: (request, response) => {
-        const email = request.body.email
-        const password = request.body.password
+        const email = request.body.email || "clement.dorlet9@etu.univ-lorraine.fr"
+        const password = request.body.password || "titi"
 
         if(!(email && password)) {
             response.status(400).json({result: "ERR_ARGS"})
@@ -109,7 +109,17 @@ module.exports = {
                     response.status(400).json({result: "ERR_CHECKED"})
                 }
                 if(bcrypt.compareSync(password, result[0].password)) {
-                    response.status(200).json({result: "OK", data: Object.assign(result[0], {permissions: permission.get(result[0].uid)})})
+                    permission.get(result[0].uid, permissions => {
+                        let data = Object.assign(result[0], {permissions})
+                        delete data.password
+                        delete data.checked
+                        delete data.notification
+
+                        response.status(200).json({
+                            result: "OK",
+                            token: jwtUtils.createToken(data)
+                        })
+                    })
                 }else response.status(400).json({result: "ERR_INVALID_INFO"})
 
                 return

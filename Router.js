@@ -18,8 +18,6 @@ exports.router = (() => {
     Router.route("/notification/register").post(notification.register)
     Router.route("/notification/send").post(notification.send)
 
-    Router.route("/permission/").get(permission.get)
-
     Router.route("/test").get((request,response) => console.log(request))
 
     return Router
