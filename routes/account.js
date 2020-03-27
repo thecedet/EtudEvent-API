@@ -87,8 +87,8 @@ module.exports = {
     },
 
     connect: (request, response) => {
-        const email = request.body.email || "clement.dorlet9@etu.univ-lorraine.fr"
-        const password = request.body.password || "titi"
+        const email = request.body.email
+        const password = request.body.password
 
         if(!(email && password)) {
             response.status(400).json({result: "ERR_ARGS"})
