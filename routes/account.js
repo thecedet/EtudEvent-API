@@ -104,11 +104,9 @@ module.exports = {
             if(result) {
                 if(result.length === 0) {
                     response.status(400).json({result: "ERR_INVALID_INFO"})
-                }
-                if(result[0].checked == 0) {
+                }else if(result[0].checked == 0) {
                     response.status(400).json({result: "ERR_CHECKED"})
-                }
-                if(bcrypt.compareSync(password, result[0].password)) {
+                }else if(bcrypt.compareSync(password, result[0].password)) {
                     permission.get(result[0].uid, permissions => {
                         let data = Object.assign(result[0], {permissions})
                         delete data.password
