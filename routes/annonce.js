@@ -8,8 +8,7 @@ user.firstName AS userFirstName, user.lastName AS userLastName
 FROM annonce 
 LEFT JOIN user 
 ON annonce.owner = user.uid
-${!uid ? `LIMIT ${0 + page*show}, ${show}` : "WHERE annonce.uid="+uid}
-ORDER BY annonce.date ASC
+${!uid ? `ORDER BY annonce.date ASC LIMIT ${0 + page*show}, ${show}` : "WHERE annonce.uid="+uid}
 `
 }
 
