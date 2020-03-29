@@ -13,7 +13,7 @@ exports.router = (() => {
     Router.route("/account/validate/:token").get(account.validate)
     Router.route("/account/connect").post(account.connect)
 
-    Router.route("/annonce/").get(annonce.select)
+    Router.route("/annonce/:uid?").get(annonce.select)
 
     Router.route("/notification/register").post(notification.register)
     Router.route("/notification/send").post(notification.send)
