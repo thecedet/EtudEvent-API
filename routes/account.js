@@ -123,5 +123,30 @@ module.exports = {
                 return
             }
         })
+    },
+    list: (request, response) => {
+      connection.query(`SELECT uid,firstName, lastName from user`,
+        (error, result ) => {
+            if(error) {
+                response.status(503).json({result: "ERR_BDD"})
+                return
+            }
+            if(result) {
+              response.status(200).json({result})
+            }
+        }) 
+    },
+    listUser: (request, response) => {
+      const user = request.params.token
+      connection.query(`SELECT * FROM permission LEFT JOIN user_permission ON permission.uid = user_permission.uid_permission LEFT JOIN user ON user_permission.uid_user = user.uid WHERE user.uid = 3`,
+        (error, result ) => {
+            if(error) {
+                response.status(503).json({result: "ERR_BDD"})
+                return
+            }
+            if(result) {
+              response.status(200).json({result})
+            }
+        }) 
     }
 }
