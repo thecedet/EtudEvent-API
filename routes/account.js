@@ -137,8 +137,9 @@ module.exports = {
         }) 
     },
     listUser: (request, response) => {
-      const user = request.params.token
-      connection.query(`SELECT * FROM permission LEFT JOIN user_permission ON permission.uid = user_permission.uid_permission LEFT JOIN user ON user_permission.uid_user = user.uid WHERE user.uid = 3`,
+      const user = request.params.user
+      console.log(user)
+      connection.query(`SELECT * FROM user where uid= ${user}`,
         (error, result ) => {
             if(error) {
                 response.status(503).json({result: "ERR_BDD"})
